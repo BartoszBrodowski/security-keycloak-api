@@ -1,39 +1,13 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import axios from "axios";
+import Menu from "./Menu";
 
-const Protected = ({ token }) => {
-  const isRun = useRef(false);
-  const [data, setData] = useState(null);
-
-  useEffect(() => {
-    if (isRun.current) return;
-    isRun.current = true;
-
-    const config = {
-      headers: {
-        authorization: `Bearer ${token}`,
-      },
-    };
-    axios
-      .get("/documents", config)
-      .then((res) => setData(res.data))
-      .catch((err) => console.log(err));
-  }, []);
-  return data ? (
-    <div className="flex flex-col gap-8">
-      {data.map((review, i) => (
-        <div
-          className="bg-white rounded-lg shadow-md text-black text-left p-8"
-          key={i}
-        >
-          <h1 className="text-2xl">{review.title}</h1>
-          <p>{review.description}</p>
-          <p>{review.rating}</p>
-        </div>
-      ))}
+const Protected = ({ client }) => {
+  return (
+    <div className="flex flex-col justify-center gap-8">
+      <h1 className="font-lg font-semibold">Protected Menu</h1>
+      <Menu client={client} />
     </div>
-  ) : (
-    <div>Loading...</div>
   );
 };
 

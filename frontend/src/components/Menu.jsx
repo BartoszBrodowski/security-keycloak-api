@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 
-const Menu = () => {
+const Menu = ({ client }) => {
   return (
-    <div>
+    <div className="flex flex-col justify-center gap-4">
+      <Link to="/movielist">Movie List</Link>
       <Link to="/reviews">My Reviews</Link>
-      <Link to="/login">Login</Link>
-      <button>Log Out</button>
+      <button onClick={() => client.logout()}>Log Out</button>
     </div>
   );
 };

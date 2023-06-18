@@ -1,24 +1,28 @@
-import { useState } from "react";
 import "./App.css";
 import useAuth from "./hooks/useAuth";
 import { Routes, Route } from "react-router-dom";
 import Protected from "./components/Protected";
 import Public from "./components/Public";
-import Menu from "./components/Menu";
+import Reviews from "./components/Reviews";
+import MovieList from "./components/MovieList";
 
 function App() {
-  const [isLogin, token] = useAuth();
+  const [isLogin, token, client] = useAuth();
 
   return (
     <div>
       {isLogin ? (
         <Routes>
-          <Route path="/reviews" element={<Protected token={token} />} />
-          <Route path="/" element={<Menu />} />
+          <Route
+            path="/"
+            element={<Protected token={token} client={client} />}
+          />
+          <Route path="/reviews" element={<Reviews token={token} />} />
+          <Route path="/movielist" element={<MovieList token={token} />} />
         </Routes>
       ) : (
         <Routes>
-          <Route path="/" element={<Public />} />
+          <Route path="*" element={<Public client={client} />} />
         </Routes>
       )}
     </div>
