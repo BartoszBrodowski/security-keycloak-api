@@ -1,7 +1,3 @@
-// const session = require("express-session");
-// const Keycloak = require("keycloak-connect");
-// const express = require("express");
-// const cors = require("cors");
 import dotenv from "dotenv";
 import express from "express";
 import cors from "cors";

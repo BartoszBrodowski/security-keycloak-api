@@ -7,7 +7,6 @@ const Protected = ({ token }) => {
 
   useEffect(() => {
     if (isRun.current) return;
-
     isRun.current = true;
 
     const config = {
@@ -15,20 +14,26 @@ const Protected = ({ token }) => {
         authorization: `Bearer ${token}`,
       },
     };
-    console.log(token);
     axios
       .get("/documents", config)
       .then((res) => setData(res.data))
       .catch((err) => console.log(err));
   }, []);
   return data ? (
-    <>
-      {data.map((rec, i) => (
-        <h3 key={i}>`${rec}`</h3>
+    <div className="flex flex-col gap-8">
+      {data.map((review, i) => (
+        <div
+          className="bg-white rounded-lg shadow-md text-black text-left p-8"
+          key={i}
+        >
+          <h1 className="text-2xl">{review.title}</h1>
+          <p>{review.description}</p>
+          <p>{review.rating}</p>
+        </div>
       ))}
-    </>
+    </div>
   ) : (
-    <div>Protected</div>
+    <div>Loading...</div>
   );
 };
 
