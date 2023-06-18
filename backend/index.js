@@ -1,16 +1,32 @@
-const session = require("express-session");
-const Keycloak = require("keycloak-connect");
-const express = require("express");
-const cors = require("cors");
+// const session = require("express-session");
+// const Keycloak = require("keycloak-connect");
+// const express = require("express");
+// const cors = require("cors");
+import dotenv from "dotenv";
+import express from "express";
+import cors from "cors";
 
-const app = express();
+import documents from "./Routes/documents.js";
+import authenticate from "./Routes/authenticate.js";
 
-app.use(
-  cors({
-    origin: "http://localhost:8080",
-  })
-);
+(async function () {
+  dotenv.config();
+  const app = express();
 
-app.listen(3000, () => {
-  console.log("Express API listening on port 3000");
-});
+  const { PORT } = process.env;
+
+  app.use(
+    cors({
+      origin: "http://localhost:5173",
+      credentials: true,
+    })
+  );
+
+  app.use(express.json());
+
+  app.listen(PORT, () => {
+    console.log(`Express API listening on port ${PORT}`);
+  });
+
+  app.use("/documents", authenticate, documents);
+})();
