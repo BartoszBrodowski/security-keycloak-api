@@ -1,0 +1,17 @@
+version: "3.7"
+services:
+  frontend:
+    build: ./frontend
+    ports:
+      - "5173:80"
+  backend:
+    build: ./backend
+    ports:
+      - "5000:5000"
+  keycloak:
+    image: quay.io/keycloak/keycloak:20.0.3
+    environment:
+      - KEYCLOAK_USER=admin
+      - KEYCLOAK_PASSWORD=admin
+    ports:
+      - "4000:8080"
