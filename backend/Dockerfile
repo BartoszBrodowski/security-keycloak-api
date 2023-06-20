@@ -1,11 +1,15 @@
 FROM node
 
+RUN ["echo", "Starting backend..."]
+
 WORKDIR /app
 
-COPY package.json .
+COPY package*.json ./
 
 RUN npm install
 
 COPY . .
 
-CMD [ "node" "index.js" ]
+RUN ["echo", "Starting backend..."]
+
+CMD ["npm", "start"]
