@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const Reviews = ({ token }) => {
   const [data, setData] = useState(null);
   const isRun = useRef(false);
-
+  console.log("Token: " + token);
   useEffect(() => {
     if (isRun.current) return;
     isRun.current = true;

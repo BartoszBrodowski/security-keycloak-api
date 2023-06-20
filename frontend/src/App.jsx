@@ -8,7 +8,7 @@ import MovieList from "./components/MovieList";
 
 function App() {
   const [isLogin, token, client] = useAuth();
-
+  console.log(token);
   return (
     <div>
       {isLogin ? (
