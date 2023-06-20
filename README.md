@@ -29,3 +29,9 @@ Run keycloak with `docker run -d -p 4000:8080 xatroxiu/keycloak-container:1.0.0`
 ### Snyk test results
 
 Tested with snyk on both Frontend and Backend. Snyk has shown no vulnerabilities.
+
+## Photos
+
+![Welcome Screen](/assets/1.png)
+![Reviews](/assets/2.png)
+![Movie List](/assets/3.png)
