@@ -1,21 +1,25 @@
-version: "3.7"
+version: '3.7'
 services:
   frontend:
     build: ./frontend
     ports:
-      - "5173:80"
+      - '5173:80'
   backend:
     build: ./backend
     ports:
-      - "5000:5000"
+      - '5000:5000'
   keycloak:
     image: quay.io/keycloak/keycloak:20.0.3
     environment:
-      - KEYCLOAK_USER=admin
-      - KEYCLOAK_PASSWORD=admin
-      - KEYCLOAK_IMPORT=/tmp/realm-export.json
+      - KEYCLOAK_ADMIN=admin
+      - KEYCLOAK_ADMIN_PASSWORD=admin
+      - KEYCLOAK_IMPORT=./realm-export.json
     volumes:
       - ./realm-export.json:/tmp/realm-export.json
     ports:
-      - "4000:8080"
-    command: start-dev
+      - '8080:8080'
+    command:
+      - '-Dkeycloak.migration.action=import'
+      - '-Dkeycloak.migration.provider=singleFile'
+      - '-Dkeycloak.migration.file=/tmp/realm-export.json'
+      - start-dev
